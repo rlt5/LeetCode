@@ -48,7 +48,6 @@ public:
             sum = dividend;
             while ( sum <= 0 ){
                 result++;
-                // std::cout << "sum = " << sum << std::endl;
                 if ( sum > diff ){
                     return result-1;
                 }
@@ -107,8 +106,6 @@ int main(){
     int divisor;
     int x[] = {0, 0};
     for (auto &testCase : list ){
-        // std::cout << "dividened = " << testCase[0] << std::endl;
-        // std::cout << "divisor = " << testCase[1] << std::endl << std::endl;
         dividend = testCase[0];
         divisor = testCase[1];
         int result = sol->divide(dividend,divisor);
