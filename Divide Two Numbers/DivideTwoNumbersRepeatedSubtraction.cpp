@@ -92,7 +92,7 @@ int main(){
     std::list< std::vector< int > > list;
     list.push_back({2147483647,2147483647});
     list.push_back({1,2147483647});
-    // list.push_back({2147483647,1});
+    list.push_back({2147483647,1});
     list.push_back({10,3});
     list.push_back({7,-3});
     list.push_back({-2147483648,1});
@@ -111,57 +111,10 @@ int main(){
         int result = sol->divide(dividend,divisor);
         if ( result != dividend/divisor ){
             std::cout << "Dividend: " << std::setw(11) << std::right << dividend << ", Divisor: " << std::setw(10) << std::right << divisor << ", Output: " << std::setw(11) << std::right << result << ", Expected: " << std::setw(11) << std::right << dividend/divisor << " FAILED <---" <<std::endl;
-            // std::cout << "FAILED: Divided: " << std::setw(10) << std::right << dividend << ", Divisor: " << std::setw(10) << std::right << divisor << std::endl;
-            // std::cout << "Output: " << result << std::endl;
-            // std::cout << "Expected: " << dividend/divisor << std::endl;
-            return 0;
         } else {
             std::cout << "Dividend: " << std::setw(11) << std::right << dividend << ", Divisor: " << std::setw(10) << std::right << divisor << ", Output: " << std::setw(11) << std::right << result << ", Expected: " << std::setw(11) << std::right << dividend/divisor <<  " PASSED" << std::endl;
         }
+
     }
-
-    // int y = -1;
-    // std::cout <<"y = " << (u_int32_t)y-4294967294 << std::endl;
-    // for (int i = 0; i < 10; i++ ){
-    //     y = y >> i;
-    //     std::cout << i << ": y = " << y << std::endl;
-    // }
-
-    // int result = sol->divide(dividend,divisor);
-    // if ( sol->divide(dividend,divisor) != dividend/divisor ){
-    // std::cout << "FAILED: Divided = " << dividend << ", Divisor = " << divisor << std::endl;
-    // std::cout << "Output: " << result << std::endl;
-    // std::cout << "Expected: " << dividend/divisor << std::endl;
-    // } else {
-    //     std::cout << "PASSED: Divided = " << dividend << ", Divisor = " << divisor << ", Output: " << result << ", Expected: " << dividend/divisor << std::endl;
-    // }
-
-    // for ( int dividend = INT_MIN; dividend <= INT_MAX; dividend++ ){
-    //     std::cout << "Dividend: " << dividend << std::endl;
-    //     for ( int divisor = INT_MIN; divisor < 0 ; divisor++){
-    //         if ( divisor % 1000000 == 0 ) std::cout << "divisor: " << divisor << std::endl;
-    //         int result = sol->divide(dividend,divisor);
-    //         if ( sol->divide(dividend,divisor) != dividend/divisor ){
-    //             std::cout << "FAILED: Divided = " << dividend << ", Divisor = " << divisor << std::endl;
-    //             std::cout << "Output: " << result << std::endl;
-    //             std::cout << "Expected: " << dividend/divisor << std::endl;
-    //             return 0;
-    //         } else {
-    //             // std::cout << "PASSED: Divided = " << dividend << ", Divisor = " << divisor << ", Output: " << result << ", Expected: " << dividend/divisor << std::endl;
-    //         }
-    //     }
-    //     for ( int divisor = 1; divisor <= INT_MAX; divisor++){
-    //         int result = sol->divide(dividend,divisor);
-    //         if ( result != dividend/divisor ){
-    //             std::cout << "FAILED: Divided = " << dividend << ", Divisor = " << divisor << std::endl;
-    //             std::cout << "Output: " << result << std::endl;
-    //             std::cout << "Expected: " << dividend/divisor << std::endl;
-    //             return 0;
-    //         } else {
-    //             std::cout << "PASSED: Divided = " << dividend << ", Divisor = " << divisor << ", Output: " << result << ", Expected: " << dividend/divisor << std::endl;
-    //         }
-    //     }
-    // }
-
-
+    return 0;
 }
