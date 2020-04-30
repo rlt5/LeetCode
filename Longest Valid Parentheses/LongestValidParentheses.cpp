@@ -6,20 +6,39 @@
 
 using namespace std;
 
+// bool validParentheses(string s){
+//     stack<char>* stk = new stack<char>();
+//     for (char c : s){
+//         if ( c == '('){
+//             stk->push(c);
+//         } else {
+//             if (!stk->empty()){
+//                 stk->pop();
+//             } else {
+//                 return false;
+//             }
+//         }
+//     }
+//     if ( stk->empty() ){
+//         return true;
+//     } else 
+//         return false;
+// }
+
 bool validParentheses(string s){
-    stack<char>* stk = new stack<char>();
+    int count = 0;
     for (char c : s){
         if ( c == '('){
-            stk->push(c);
+            count++;
         } else {
-            if (!stk->empty()){
-                stk->pop();
+            if (count){
+                count--;
             } else {
                 return false;
             }
         }
     }
-    if ( stk->empty() ){
+    if ( count == 0 ){
         return true;
     } else 
         return false;
