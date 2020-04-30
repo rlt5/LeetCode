@@ -123,25 +123,61 @@ using namespace std;
 
 ////////////////////////////////////////////////////////////////
 // O(n) STACK Solution
+// int longestValidParentheses(string s) {
+//     int maxReturn = 0;
+//     stack<int> stack;
+//     stack.push(-1);
+//     for (int i = 0; i < s.length(); i++) {
+//         if (s[i] == '(') {
+//             stack.push(i);
+//         } else {
+//             stack.pop();
+//             if (stack.empty()) {
+//                 stack.push(i);
+//             } else {
+//                 maxReturn = max(maxReturn, i - stack.top());
+//             }
+//         }
+//     }
+//     return maxReturn;
+// }
+////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////
+// O(n) No DP. Go through string once forward then once backwards.
+// No DP therefore no space usage.
 int longestValidParentheses(string s) {
-    int maxReturn = 0;
-    stack<int> stack;
-    stack.push(-1);
-    for (int i = 0; i < s.length(); i++) {
+    int length = s.length();
+    int left = 0, right = 0, maxLength = 0;
+    for (int i = 0; i < length; i++) {
         if (s[i] == '(') {
-            stack.push(i);
+            left++;
         } else {
-            stack.pop();
-            if (stack.empty()) {
-                stack.push(i);
-            } else {
-                maxReturn = max(maxReturn, i - stack.top());
-            }
+            right++;
+        }
+        if (left == right) {
+            maxLength = max(maxLength, 2 * right);
+        } else if (right >= left) {
+            left = right = 0;
         }
     }
-    return maxReturn;
+    left = right = 0;
+    for (int i = length - 1; i >= 0; i--) {
+        if (s[i] == '(') {
+            left++;
+        } else {
+            right++;
+        }
+        if (left == right) {
+            maxLength = max(maxLength, 2 * left);
+        } else if (left >= right) {
+            left = right = 0;
+        }
+    }
+    return maxLength;
 }
 ////////////////////////////////////////////////////////////////
+
 
 
 
