@@ -18,10 +18,7 @@
 class Solution {
 public:
     int numJewelsInStones(string J, string S) {
-        int jewels[256];
-        for ( int i = 0; i < 256; i++ ){
-            jewels[i] = 0;
-        }
+        int* jewels = new int[256];
         int count = 0;
         for (char jewel : J){
             jewels[jewel]++;
