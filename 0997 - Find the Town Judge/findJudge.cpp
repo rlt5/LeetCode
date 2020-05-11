@@ -39,6 +39,9 @@
 // trust[i] are all different
 // trust[i][0] != trust[i][1]
 // 1 <= trust[i][0], trust[i][1] <= N
+#include <vector>
+#include <iostream>
+using namespace std;
 
 class Solution {
 public:
