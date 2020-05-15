@@ -21,6 +21,18 @@
 // Output: "0"
 // Explanation: Remove all the digits from the number and it is left with nothing which is 0.
 
+// TestCases:
+// "1432219"
+// 3
+// "111112"
+// 3
+// "1010101"
+// 3
+// "1010101"
+// 2
+// "1010101"
+// 1
+
 // Runtime is O(10002^2) if string is comprised of all the same digit and k = num.length
 class Solution {
 public:
