@@ -50,7 +50,7 @@ using namespace std;
 class Solution {
 public:
     bool isAnagram(map<char,int> dest, map<char,int> src ){
-r
+
         map<char, int>::iterator it;
         for (it = dest.begin(); it != dest.end(); it++){
             if ( it->second != src[it->first]){
