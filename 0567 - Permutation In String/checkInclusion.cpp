@@ -25,39 +25,43 @@
 // "ab"
 // "eidboaoo"
 
-
-// A hashmap implementation
-#include <map>
 #include <string>
 using namespace std;
 
-
+// Array Hashmap solution
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
-        map<char, int> src, dest;
+        int src[26];
+        int dest[26];
         int count = 0;
         int begin = 0;
         int end = 0;
         
+        for (int i = 0; i < 26; i++){
+            src[i] = 0;
+            dest[i] = 0;
+        }
+        
         for ( char c : s1 ){
-            src[c]++;
+            src[c - 'a']++;
         }
 
         while ( end < s2.size() ){
-            dest[s2[end]]++;
+            dest[s2[end] - 'a']++;
             
-            if ( dest[s2[end]] == src[s2[end]] ){
-                count += dest[s2[end]];
+            if ( dest[s2[end] - 'a'] == src[s2[end] - 'a'] ){
+                count += dest[s2[end] - 'a'];
             }
             
             while ( count == s1.size() ){
                 if ( end - begin +1 == s1.size() ){
+                    // cout << "end=" << end << " begin=" << begin << endl; 
                     return true;
                 }
-                if ( dest[s2[begin]] == src[s2[begin]] )
-                    count -= dest[s2[begin]];
-                dest[s2[begin]]--;
+                if ( dest[s2[begin] - 'a'] == src[s2[begin] - 'a'] )
+                    count -= dest[s2[begin] - 'a'];
+                dest[s2[begin] - 'a']--;
                 begin++;
             }
             end++;
@@ -65,3 +69,43 @@ public:
         return false;
     }
 };
+
+// // A hashmap implementation
+// #include <map>
+// #include <string>
+// using namespace std;
+
+
+// class Solution {
+// public:
+//     bool checkInclusion(string s1, string s2) {
+//         map<char, int> src, dest;
+//         int count = 0;
+//         int begin = 0;
+//         int end = 0;
+        
+//         for ( char c : s1 ){
+//             src[c]++;
+//         }
+
+//         while ( end < s2.size() ){
+//             dest[s2[end]]++;
+            
+//             if ( dest[s2[end]] == src[s2[end]] ){
+//                 count += dest[s2[end]];
+//             }
+            
+//             while ( count == s1.size() ){
+//                 if ( end - begin +1 == s1.size() ){
+//                     return true;
+//                 }
+//                 if ( dest[s2[begin]] == src[s2[begin]] )
+//                     count -= dest[s2[begin]];
+//                 dest[s2[begin]]--;
+//                 begin++;
+//             }
+//             end++;
+//         }
+//         return false;
+//     }
+// };
