@@ -5,14 +5,24 @@
 #include <iostream>
 using namespace std;
 
-// Array Implementation of Stack
+// biPartition by Keeping track of status of which team each node is on. If any conflict occurs, return false;
 class Solution {
 public:
+    map<int, vector<int>> edge;
+    vector<int> status; // Status 0: Unknown, 1: team_1, -1: team_2
+
+    bool helper(int current, int currentStatus){
+        status[current] = currentStatus;
+        for ( int child : edge[current]){
+            if ( status[child] == currentStatus ) return false;
+            if ( status[child] == 0 && !helper(child, -currentStatus)) return false;
+        }
+        return true;
+    
+    }
 
     bool possibleBipartition(int N, vector<vector<int>>& dislikes) {
-        if ( N < 3 )
-            return true;
-        map<int, vector<int>> edge;
+        
         for ( vector<int> dislike : dislikes ){
             dislike[0]--;
             dislike[1]--;
@@ -20,41 +30,67 @@ public:
             edge[dislike[1]].push_back(dislike[0]);
         }
         
-        for ( int it = 0; it < N; it++ ){
-            int s[dislikes.size()];
-            int curr = 0;
-            int visited[N];
-            int parents[N];
-            for ( int i = 0; i < N; i++ ){
-                visited[i] = -1;
-                parents[i] = -1;
-            }
-            
-            int current = it;
-            s[curr] = current;
-            visited[current] = 0;
-            while ( curr >= 0 ){
-                current = s[curr];
-                curr--;
-                for ( int child : edge[current] ){
-                    if ( child != parents[current] ){
-                        if ( visited[child] == -1 ){ // not visited
-                            parents[child] = current;
-                            curr++;
-                            s[curr] = child;
-                            visited[child] = visited[current]+1;    
-                        } else { // cycle exists
-                            if ( (visited[child] + visited[current] + 1) % 2 ) {
-                                return false;
-                            }
-                        }    
-                    }
-                }
-            }
+        status = vector<int>(N,0);
+
+        for ( int i = 0; i < N; i++ ){
+            if ( status[i] == 0 && !helper(i,1)) return false;
         }
         return true;
     }
 };
+
+
+
+// // Array Implementation of Stack
+// class Solution {
+// public:
+
+//     bool possibleBipartition(int N, vector<vector<int>>& dislikes) {
+//         if ( N < 3 )
+//             return true;
+//         map<int, vector<int>> edge;
+//         for ( vector<int> dislike : dislikes ){
+//             dislike[0]--;
+//             dislike[1]--;
+//             edge[dislike[0]].push_back(dislike[1]);
+//             edge[dislike[1]].push_back(dislike[0]);
+//         }
+        
+//         for ( int it = 0; it < N; it++ ){
+//             int s[dislikes.size()];
+//             int curr = 0;
+//             int visited[N];
+//             int parents[N];
+//             for ( int i = 0; i < N; i++ ){
+//                 visited[i] = -1;
+//                 // parents[i] = -1;
+//             }
+            
+//             int current = it;
+//             s[curr] = current;
+//             visited[current] = 0;
+//             while ( curr >= 0 ){
+//                 current = s[curr];
+//                 curr--;
+//                 for ( int child : edge[current] ){
+//                     // if ( child != parents[current] ){
+//                         if ( visited[child] == -1 ){ // not visited
+//                             parents[child] = current;
+//                             curr++;
+//                             s[curr] = child;
+//                             visited[child] = visited[current]+1;    
+//                         } else { // cycle exists
+//                             if ( (visited[child] + visited[current] + 1) % 2 ) {
+//                                 return false;
+//                             }
+//                         }    
+//                     // }
+//                 }
+//             }
+//         }
+//         return true;
+//     }
+// };
 
 // // STACK IMPLEMENTATION
 // class Solution {
