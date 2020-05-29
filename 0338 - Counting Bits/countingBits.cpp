@@ -19,25 +19,36 @@ using namespace std;
 
 class Solution {
 public:
-    
-    // O(n) solution.
-    // http://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetTable
+
+    // Fastest solution O(n)
     vector<int> countBits(int num){
-        static const int S[5] = {1, 2, 4, 8, 16};
-        static const int B[5] = {0x55555555,0x33333333,0x0F0F0F0F,0x00FF00FF,0x0000FFFF};
-        vector<int> solution;
-        int v,c;
-        for ( int i = 0; i <= num; i++ ){
-            v = i;
-            c = v - ((v >> 1) & B[0]);
-            c = ((c >> S[1]) & B[1]) + (c & B[1]);
-            c = ((c >> S[2]) + c) & B[2];
-            c = ((c >> S[3]) + c) & B[3];
-            c = ((c >> S[4]) + c) & B[4];
-            solution.push_back(c);
+        vector<int> solution(num+1,0);
+        for ( int i = 1; i <= num; i++ ){
+            solution[i] = solution[i>>1] + i%2;
         }
-        return solution;    
+        return solution;
     }
+
+
+
+    // // O(n) solution.
+    // // http://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetTable
+    // vector<int> countBits(int num){
+    //     static const int S[5] = {1, 2, 4, 8, 16};
+    //     static const int B[5] = {0x55555555,0x33333333,0x0F0F0F0F,0x00FF00FF,0x0000FFFF};
+    //     vector<int> solution;
+    //     int v,c;
+    //     for ( int i = 0; i <= num; i++ ){
+    //         v = i;
+    //         c = v - ((v >> 1) & B[0]);
+    //         c = ((c >> S[1]) & B[1]) + (c & B[1]);
+    //         c = ((c >> S[2]) + c) & B[2];
+    //         c = ((c >> S[3]) + c) & B[3];
+    //         c = ((c >> S[4]) + c) & B[4];
+    //         solution.push_back(c);
+    //     }
+    //     return solution;    
+    // }
     
     // // CHEATING USING POPCOUNT
     // vector<int> countBits(int num) {
